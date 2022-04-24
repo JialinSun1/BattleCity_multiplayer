@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package battlecity;
+
+service battlecityService {
+    rpc AckOp (AckRequest) returns (AckReply) {}
+    rpc GetOp (OpRequest) returns (AckReply) {}
+    rpc GetMap (AckRequest) returns (MapReply) {}
+    rpc SendTank (TankRequest) returns (AckReply) {}
+}
+
+message AckRequest {
+    int32 flag = 1;
+    int32 timestamp = 2;
+    string node = 3;
+
+}
+
+message AckReply {
+    int32 flag = 1;
+    int32 timestamp = 2;
+    string node = 3;
+  }
+  
+message OpRequest {
+  bool left = 1;
+  bool right = 2;
+  bool up = 3;
+  bool down = 4;
+  bool space = 5;
+  bool KEYDOWN = 6;
+  int32 timestamp = 7;
+  string node = 8;
+}
+
+message MapReply {
+  repeated string wall_rect = 1;
+  repeated string steel_rect = 2;
+  repeated string water_rect = 3;
+  repeated string bullet_rect = 4;
+  repeated string tank_id = 5;
+  repeated string tank_facing = 6;
+  repeated string tank_rect = 7;
+  int32 timestamp = 8;
+  string node = 9;
+  
+}
+
+message TankRequest {
+  string tank_rect = 1;
+  int32 timestamp = 2;
+  string node = 3;
+}
